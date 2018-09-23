@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/ravraw/Algorithms/issues"
   },
-  "homepage": "https://github.com/ravraw/Algorithms#readme"
+  "homepage": "https://github.com/ravraw/Algorithms#readme",
+  "dependencies": {
+    "jest": "^23.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "regenerator-runtime": "^0.12.1"
+  }
 }
