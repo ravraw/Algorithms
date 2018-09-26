@@ -21,7 +21,7 @@ class singlyLinkedList {
       this.tail = newNode;
     }
     this.length++;
-    return this;
+    return newNode;
   }
 
   pop() {
@@ -89,6 +89,31 @@ class singlyLinkedList {
     }
     return false;
   }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) return !!this.unshift(val);
+    if (index === this.length) return !!this.push(val);
+
+    const prev = this.get(index - 1);
+    const newNode = new Node(val);
+    newNode.next = prev.next;
+    prev.next = newNode;
+    this.length++;
+    return this;
+  }
+
+  remove(index) {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    const prevNode = this.get(index - 1);
+    const removedNode = prevNode.next;
+    prev.next = removedNode.next;
+    this.length--;
+    return removedNode;
+  }
 }
 
 // Methods in use
@@ -96,9 +121,9 @@ class singlyLinkedList {
 const list = new singlyLinkedList();
 list.push("Hi");
 list.push("There");
-list.push("How");
-list.push("are");
-list.push("you");
+// list.push("How");
+// list.push("are");
+// list.push("you");
 
 ///
 console.log("-----------------------------");
@@ -110,7 +135,9 @@ console.log("-----------------------------");
 // console.log("shift##", list.shift());
 // console.log("unshift##", list.unshift("raw"));
 //console.log("get ##", list.get(3));
-console.log("set ##", list.set(3, "new Value"));
+//console.log("set ##", list.set(3, "new Value"));
+// console.log("insert ##", list.insert(0, "new Value"));
+console.log("removed ##", list.remove(0));
 
 console.log("-----------------------------");
 console.log(list);
