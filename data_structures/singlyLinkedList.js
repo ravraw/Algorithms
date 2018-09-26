@@ -51,15 +51,31 @@ class singlyLinkedList {
     let oldHead = this.head;
     this.head = oldHead.next;
     this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
     return oldHead;
+  }
+
+  unshift(val) {
+    let newHead = new Node(val);
+    if (!this.head) {
+      this.head = newHead;
+      this.tail = newHead;
+    } else {
+      newHead.next = this.head;
+      this.head = newHead;
+    }
+    this.length++;
+    return this.head;
   }
 }
 
-//
+// Methods in use
 
 const list = new singlyLinkedList();
-list.push("Hi");
-list.push("There");
+// list.push("Hi");
+// list.push("There");
 // list.push("How");
 // list.push("are");
 // list.push("you");
@@ -69,9 +85,16 @@ console.log("-----------------------------");
 console.log(list);
 console.log("-----------------------------");
 
-// console.log(list.pop());
-console.log(list.shift());
+// console.log("pop##"list.pop());
+// console.log("push##", list.push("rav"));
+// console.log("shift##", list.shift());
+console.log("unshift##", list.unshift("raw"));
 
+console.log("-----------------------------");
+console.log(list);
+console.log("-----------------------------");
+
+console.log("unshift##", list.unshift("ravi"));
 console.log("-----------------------------");
 console.log(list);
 console.log("-----------------------------");
