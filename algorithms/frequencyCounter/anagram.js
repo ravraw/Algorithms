@@ -1,6 +1,6 @@
 // Check if the provided string is an anagram
 
-export const isAnagram = (str1, str2) => {
+const isAnagram = (str1, str2) => {
   // return false if both strings are not of sme lenght
   if (str1.length !== str2.length) {
     return false;
@@ -28,3 +28,4 @@ export const isAnagram = (str1, str2) => {
 };
 
 console.log(isAnagram("abc1233", "abc12345"));
+console.log(isAnagram("", ""));
