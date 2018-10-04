@@ -1,0 +1,14 @@
+{
+  "name": "kata8-numberguesser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kata8-numberGuesser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.1.6"
+  }
+}
