@@ -38,5 +38,25 @@ function anagrams(stringA, stringB) {
   return true;
 }
 
+//method 2
+
+const anagrams2 = (str1, str2) => {
+  let sorted1 = str1
+    .replace(/[^\w]/g, "")
+    .split("")
+    .sort()
+    .join("")
+    .toLowerCase();
+  let sorted2 = str2
+    .replace(/[^\w]/g, "")
+    .split("")
+    .sort()
+    .join("")
+    .toLowerCase();
+  console.log(sorted1, sorted2);
+  return sorted1 === sorted2;
+};
+
 module.exports = anagrams;
 console.log(anagrams(" tree, a life, a bench", "A tree, a fence, a yard"));
+console.log(anagrams("RAIL! SAFETY!", "fairy tales"));
