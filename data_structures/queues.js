@@ -1,3 +1,4 @@
+// A new node to be inserted
 class Node {
   constructor(val) {
     this.val = val;
@@ -5,12 +6,14 @@ class Node {
   }
 }
 
+// Queue data-structure
 class Queue {
   constructor(val) {
     this.first = null;
     this.last = null;
     this.size = 0;
   }
+  // Add node method
   enQueue(val) {
     const newNode = new Node(val);
     if (!this.first) {
@@ -22,6 +25,7 @@ class Queue {
     }
     return ++this.size;
   }
+  // Remove node method
   deQueue() {
     if (!this.first) return null;
     if (this.size === 1) {
