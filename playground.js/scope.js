@@ -29,14 +29,14 @@ const totalCells = () => {
   return countRows() * countColumns();
 };
 
-const convertColumn = col => {
-  return col.charCodeAt(0) - 65;
+const convertColumn = cell => {
+  return cell.charCodeAt(0) - 65;
 };
 
 const lightCell = cell => {
   let col = convertColumn(cell);
   let row = +cell[1] - 1;
-  if (cell.length === 2 && (col >= 65 && col <= 73) && (row >= 0 && row <= 9)) {
+  if (cell.length === 2 && (col >= 0 && col <= 9) && (row >= 0 && row <= 9)) {
     return GRID[row][col];
   }
   return false;
@@ -81,7 +81,7 @@ const conditionTracker = condition => {
       let cellName = convertToCellName(row, col);
       conditionArray.push(cellName);
     }
-    if (col < GRID[0].length) {
+    if (col < GRID[0].length - 1) {
       col++;
     } else {
       col = 0;
@@ -115,4 +115,69 @@ const shipReport = () => {
   return [leftShip, rightShip];
 };
 
-console.log(shipReport());
+const howDangerous = cell => {
+  return isRock(cell) ? 100 : isCurrent(cell) ? 50 : 0;
+};
+
+//Helper to calculate % of given condition
+const percentageOf = cb => {
+  let condition = cb().length;
+  let gridSize = countRows() * countColumns();
+  return ((condition / gridSize) * 100).toFixed(2);
+};
+
+const percentageReport = () => {
+  return [percentageOf(allRocks), percentageOf(allCurrents)];
+};
+
+const safetyReport = () => {
+  let percentageGRID = GRID.map(row => [...row]);
+  let row = 0;
+  let col = 0;
+  while (row < percentageGRID.length) {
+    let cellValue = percentageGRID[row][col];
+    if (cellValue === "^") {
+      percentageGRID[row][col] = 100;
+    } else if (cellValue === "~") {
+      percentageGRID[row][col] = 50;
+    } else {
+      percentageGRID[row][col] = 0;
+    }
+    if (col < percentageGRID[0].length - 1) {
+      col++;
+    } else {
+      col = 0;
+      row++;
+    }
+  }
+
+  return percentageGRID;
+};
+// //helper function to convert cell to position number
+// const convertCellToNumber = cell => {
+//   let row = +cell.slice(1);
+//   let col = convertColumn(cell);
+//   //console.log(row, col);
+//   return (row - 1) * GRID.length + col + 1;
+// };
+
+// const calcDistance = (cell1, cell2) => {
+//   let position1 = convertCellToNumber(cell1);
+//   let position2 = convertCellToNumber(cell2);
+//   //console.log(position1, position2);
+//   return Math.abs(position1 - position2);
+// };
+// console.log(calcDistance("A1", "J10"));
+
+const calcDistance = (cell1, cell2) => {
+  let rowCell1 = +cell1.slice(1);
+  let colCell1 = convertColumn(cell1) + 1;
+  let rowCell2 = +cell2.slice(1);
+  let colCell2 = convertColumn(cell2) + 1;
+  //console.log(rowCell1, colCell1, rowCell2, colCell2);
+  return Math.sqrt(
+    (colCell2 - colCell1) ** 2 + (rowCell2 - rowCell1) ** 2
+  ).toFixed(2);
+};
+console.log(calcDistance("A1", "J10"));
+console.log(calcDistance("A1", "J10"));

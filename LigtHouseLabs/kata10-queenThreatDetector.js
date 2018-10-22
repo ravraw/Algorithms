@@ -60,9 +60,27 @@ const queenThreat = board => {
 
   // diagonaly
 
-  for (let i = 0; i < board.length * 2; i++) {
-    arrCol.push(i);
-    arrRow.push(i);
+  for (let j = 0; j < 8 * 2 - 1; j++) {
+    let leftArr = [];
+    let rightArr = [];
+    for (let i = 0; i < j + 1; i++) {
+      if (j < 8) {
+        leftArr.push(board[i][j - i]);
+        rightArr.push(board[i][7 - i]);
+      } else {
+        leftArr.push(board[i][j - i]);
+        rightArr.push(board[i][7 - i]);
+      }
+    }
+
+    let leftArrSum = leftArr.reduce((acc, cur) => acc + cur);
+    let rightArrSum = rightArr.reduce((acc, cur) => acc + cur);
+    if (rightArrSum === 2 || leftArrSum === 2) {
+      threatStatus.rowThreat = true;
+      break;
+    }
+    console.log("Left:", leftArr);
+    console.log("Right:", rightArr);
   }
 
   //
@@ -72,24 +90,35 @@ const queenThreat = board => {
 };
 
 const whiteQueen = [0, 3];
-const blackQueen = [3, 0];
+const blackQueen = [3, 6];
 
 const board = generateBoard(whiteQueen, blackQueen, 8);
 console.log(queenThreat(board));
 
-0;
-1, 0;
-2, 1, 0;
-3, 2, 1, 0;
-4, 3, 2, 1, 0;
-5, 4, 3, 2, 1, 0;
-[0,1,]
-                  [0][0]                            a 0  b 0
-               [0][1] [1][0]                     a 1  b = a
-           [0][2] [1][1] [2][0]                  a 2  b= a
-        [0][3] [1][2] [2][1] [3][0]              a 3 
-     [0][4] [1][3] [2][2] [3][1] [4][0]
-  [0][5] [1][4][2][3] [3][2] [4][1][5][0]
+// 0;
+// 1, 0;
+// 2, 1, 0;
+// 3, 2, 1, 0;
+// 4, 3, 2, 1, 0;
+// 5, 4, 3, 2, 1, 0;
+// [0,1,]
 
+//left-top
+//   [0][0]                                 a 0  b 0
+//   [0][1] [1][0]                          a 1  b = a
+//   [0][2] [1][1] [2][0]                   a 2  b= a
+//   [0][3] [1][2] [2][1] [3][0]            a 3
+//   [0][4] [1][3] [2][2] [3][1] [4][0]
+//   [0][5] [1][4] [2][3] [3][2] [4][1] [5][0]
+//   [0][6] [1][5] [2][4] [3][3] [4][2] [5][1] [5][0]
 
- 
+//left-bottom
+
+// [5][0] [6][1] [7][2]
+// [6][0] [7][1]
+// [7][0]
+
+// [0][7]
+// [0][6] [1][7]
+// [0][5] [1][6] [2][7]
+// [0][4] [1][5] [2][6] [3][7]
