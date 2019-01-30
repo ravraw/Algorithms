@@ -1,14 +1,14 @@
 const GRID = [
-  ["", "", "", "^", "", "", "", "", "", ""],
-  ["", "", "v", "", "~", "", "", "", "", ""],
-  ["", "v", "", "", "^", "^", "", "", "", ""],
-  ["", "", "", "", "^", "^", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "v", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
-  ["", "", "", "", "", "", "", "", "", ""],
-  ["", "^", "~", "~", "", "", "", "^", "", ""],
-  ["", "^", "", "~", "~", "", "", "", "", ""],
-  ["", "^", "", "", "~", "~", "", "", "", ""]
+  ['', '', '', '^', '', '', '', '', '', ''],
+  ['', '', 'v', '', '~', '', '', '', '', ''],
+  ['', 'v', '', '', '^', '^', '', '', '', ''],
+  ['', '', '', '', '^', '^', '', '', '', ''],
+  ['', '', '', '', '', '', '', '', 'v', ''],
+  ['', '', '', '', '', '', '', '', '', ''],
+  ['', '', '', '', '', '', '', '', '', ''],
+  ['', '^', '~', '~', '', '', '', '^', '', ''],
+  ['', '^', '', '~', '~', '', '', '', '', ''],
+  ['', '^', '', '', '~', '~', '', '', '', '']
 ];
 
 const countRows = () => {
@@ -43,15 +43,15 @@ const lightCell = cell => {
 };
 
 const isRock = cell => {
-  return lightCell(cell) === "^";
+  return lightCell(cell) === '^';
 };
 
 const isCurrent = cell => {
-  return lightCell(cell) === "~";
+  return lightCell(cell) === '~';
 };
 
 const isShip = cell => {
-  return lightCell(cell) === "v";
+  return lightCell(cell) === 'v';
 };
 
 const lightRow = row => {
@@ -92,13 +92,13 @@ const conditionTracker = condition => {
 };
 
 const allRocks = () => {
-  return conditionTracker("^");
+  return conditionTracker('^');
 };
 const allCurrents = () => {
-  return conditionTracker("~");
+  return conditionTracker('~');
 };
 const allShips = () => {
-  return conditionTracker("v");
+  return conditionTracker('v');
 };
 
 const firstRock = () => {
@@ -136,9 +136,9 @@ const safetyReport = () => {
   let col = 0;
   while (row < percentageGRID.length) {
     let cellValue = percentageGRID[row][col];
-    if (cellValue === "^") {
+    if (cellValue === '^') {
       percentageGRID[row][col] = 100;
-    } else if (cellValue === "~") {
+    } else if (cellValue === '~') {
       percentageGRID[row][col] = 50;
     } else {
       percentageGRID[row][col] = 0;
@@ -179,5 +179,5 @@ const calcDistance = (cell1, cell2) => {
     (colCell2 - colCell1) ** 2 + (rowCell2 - rowCell1) ** 2
   ).toFixed(2);
 };
-console.log(calcDistance("A1", "J10"));
-console.log(calcDistance("A1", "J10"));
+console.log(calcDistance('A1', 'J10'));
+console.log(calcDistance('A1', 'J10'));
